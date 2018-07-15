@@ -35,7 +35,7 @@ $vm.source=function(pid,event){
 					if($vm.module_list["sys_code_viewer"]==undefined){
 						$vm.module_list["sys_code_viewer"]={url:url}
 					}
-					$vm.load_module_v2("sys_code_viewer",'',{code:data,msg:msg,url:module_url});
+					$vm.load_module_v2("sys_code_viewer",'',{code:data,name:msg,url:module_url});
 				}
 			})
 		}
@@ -66,7 +66,7 @@ $vm.source=function(pid,event){
 		if($vm.module_list["sys_code_viewer"]==undefined){
 			$vm.module_list["sys_code_viewer"]={url:url}
 		}
-		$vm.load_module_v2("sys_code_viewer",'',{code:txt2,msg:"modules",url:""});
+		$vm.load_module_v2("sys_code_viewer",'',{code:txt2,name:"modules",url:""});
     }
 	else if(event.shiftKey){
 		var nm=$vm.vm[pid].name;
