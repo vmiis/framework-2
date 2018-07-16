@@ -1,7 +1,7 @@
 //------------------------------------------------------------------
 $vm.init_v3=function(options){
 	var callback=options.callback;
-	$vm.vm={};
+	if($vm.vm==undefined) $vm.vm={};
 	$vm.edge=0;
 	if(navigator.appVersion.indexOf('Edge')!=-1) $vm.edge=1;
 	$vm.user="guest";
