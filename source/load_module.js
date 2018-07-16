@@ -171,6 +171,7 @@ $vm.insert_module=function(options){
     $vm.page_stack_index++;
     $vm.page_stack.push({ID:pid,slot:slot,index:$vm.page_stack_index});
     window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, null);
+	if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
     console.log($vm.page_stack)
     //=====================================
     return;
@@ -468,12 +469,14 @@ $vm.load_module_by_name=function(name,slot,op,callback){
 			callback:callback
 		 }
 		 $vm.load_module(param);
+		 /*
 		 var title0=document.title.split('|').pop();
 		 var title=$vm.module_list[name].name_for_search;
 		 if(title==undefined) title="";
 		 if(title!="") title=title+" | "+title0;
 		 else title=title0;
 		 document.title=title;
+		 */
 	}
 }
 //-----------------------------------
