@@ -170,7 +170,26 @@ $vm.insert_module=function(options){
 	$('#D'+pid).triggerHandler('show');
     $vm.page_stack_index++;
     $vm.page_stack.push({ID:pid,slot:slot,index:$vm.page_stack_index});
-    window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, null);
+	var pp=null;
+	if($vm.vm_router!=undefined){
+		var qq="";
+		var q=window.location.href.split('?/');
+		if(q.length==2){
+			var nm=q[1].split('&')[0];
+			var a=q[1].replace(nm,'');
+			if(a.length>0) qq=a;
+		}
+		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+qq;
+	}
+	/*
+	if($vm.vm_router!=undefined){
+		var qq="";
+		var q=window.location.href.split('?');
+		if(q.length==2) qq="?"+q[1];
+		pp=$vm.hosting_path+"/"+$vm.vm[pid].name+qq;
+	}
+	*/
+    window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, pp);
 	if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
     console.log($vm.page_stack)
     //=====================================
