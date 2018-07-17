@@ -170,7 +170,44 @@ $vm.insert_module=function(options){
 	$('#D'+pid).triggerHandler('show');
     $vm.page_stack_index++;
     $vm.page_stack.push({ID:pid,slot:slot,index:$vm.page_stack_index});
-    window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, null);
+	var pp=null;
+	if($vm.vm_router!=undefined){
+		var dd="";
+		var q=window.location.href.split('?');
+		if(q.length==2){
+			if(q[1].length>0){
+				if(q[1][0]!='/'){
+					//.com/?xxx
+					//.com/index.html?xxx
+					dd="&"+q[1]; //&xxx
+				}
+				else{
+					//.com/?/xxx
+					//.com/?/xxx&yyy
+					//.com/index.html?/xxx
+					//.com/index.html?/xxx&yyy
+					//q[1]=/xxx
+					//q[1]=/xxx&yyy
+					var s=q[1].split('&')[0];
+					//s=/xxx
+					dd=q[1].replace(s,''); //remove /xxx
+				}
+			}
+			else{
+				// .com/?
+			}
+		}
+		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+dd;
+	}
+	/*
+	if($vm.vm_router!=undefined){
+		var qq="";
+		var q=window.location.href.split('?');
+		if(q.length==2) qq="?"+q[1];
+		pp=$vm.hosting_path+"/"+$vm.vm[pid].name+qq;
+	}
+	*/
+    window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, pp);
 	if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
     console.log($vm.page_stack)
     //=====================================
