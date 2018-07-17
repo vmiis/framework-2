@@ -172,14 +172,32 @@ $vm.insert_module=function(options){
     $vm.page_stack.push({ID:pid,slot:slot,index:$vm.page_stack_index});
 	var pp=null;
 	if($vm.vm_router!=undefined){
-		var qq="";
-		var q=window.location.href.split('?/');
+		var dd="";
+		var q=window.location.href.split('?');
 		if(q.length==2){
-			var nm=q[1].split('&')[0];
-			var a=q[1].replace(nm,'');
-			if(a.length>0) qq=a;
+			if(q[1].length>0){
+				if(q[1][0]!='/'){
+					//.com/?xxx
+					//.com/index.html?xxx
+					dd="&"+q[1]; //&xxx
+				}
+				else{
+					//.com/?/xxx
+					//.com/?/xxx&yyy
+					//.com/index.html?/xxx
+					//.com/index.html?/xxx&yyy
+					//q[1]=/xxx
+					//q[1]=/xxx&yyy
+					var s=q[1].split('&')[0];
+					//s=/xxx
+					dd=q[1].replace(s,''); //remove /xxx
+				}
+			}
+			else{
+				// .com/?
+			}
 		}
-		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+qq;
+		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+dd;
 	}
 	/*
 	if($vm.vm_router!=undefined){
