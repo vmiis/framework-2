@@ -199,6 +199,8 @@ $vm.insert_module=function(options){
 		}
 		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+dd;
 	}
+	console.log(pp);
+	console.log($vm.vm_router);
 	/*
 	if($vm.vm_router!=undefined){
 		var qq="";
