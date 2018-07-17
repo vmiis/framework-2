@@ -197,18 +197,8 @@ $vm.insert_module=function(options){
 				// .com/?
 			}
 		}
-		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name+dd;
+		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name.replace(/_/g,'\/')+dd;
 	}
-	console.log(pp);
-	console.log($vm.vm_router);
-	/*
-	if($vm.vm_router!=undefined){
-		var qq="";
-		var q=window.location.href.split('?');
-		if(q.length==2) qq="?"+q[1];
-		pp=$vm.hosting_path+"/"+$vm.vm[pid].name+qq;
-	}
-	*/
     window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, pp);
 	if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
     console.log($vm.page_stack)
