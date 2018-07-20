@@ -200,7 +200,8 @@ $vm.insert_module=function(options){
 		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name.replace(/_/g,'\/')+dd;
 	}
     window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, pp);
-	if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
+	//if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
+	if($vm.show!=undefined){ $vm.show(pid); }
     console.log($vm.page_stack)
     //=====================================
     return;
@@ -261,7 +262,8 @@ window.onpopstate=function(event) {
             var top=$vm.page_stack[L-1];
             $('#D'+top.ID).css('display','block');
 			$('#D'+top.ID).triggerHandler('show');
-			if($vm.change_meta!=undefined){ $vm.change_meta(top.ID); }
+			//if($vm.change_meta!=undefined){ $vm.change_meta(top.ID); }
+			if($vm.show!=undefined){ $vm.show(top.ID); }
         }
     }
     else if(W_index>V_index){
@@ -273,7 +275,8 @@ window.onpopstate=function(event) {
         $('#D'+event.state.ID).css('display','block');
 		$('#D'+event.state.ID).triggerHandler('show');
         $vm.page_stack.push(event.state);
-		if($vm.change_meta!=undefined){ $vm.change_meta(event.state.ID); }
+		//if($vm.change_meta!=undefined){ $vm.change_meta(event.state.ID); }
+		if($vm.show!=undefined){ $vm.show(event.state.ID); }
     }
     console.log($vm.page_stack);
     //new ==========================================
