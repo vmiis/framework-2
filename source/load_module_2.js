@@ -178,8 +178,9 @@ $vm.load_module=function(options){
         //------------------------------
         //if(url.indexOf('http://')==-1 && url.indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
 		//------------------------------
-		var ver=localStorage.getItem(url+"_ver");
-		var txt=localStorage.getItem(url+"_txt");
+		var storage_url=$vm.hosting_path+"-"+url;
+		var ver=localStorage.getItem(storage_url+"_ver");
+		var txt=localStorage.getItem(storage_url+"_txt");
 		var http127_i=0;
 		if($vm.hosting_path.indexOf('http://127.0.0.1')!=-1 || $vm.hosting_path.indexOf('http://localhost')!=-1) http127_i=1;
 		/*
@@ -207,8 +208,8 @@ $vm.load_module=function(options){
 					data=data.replace(/__CURRENT_NAME__/g,nm);
 				}
 				//-----------------------------------
-				localStorage.setItem(url+"_txt",data);
-				localStorage.setItem(url+"_ver",$vm.version);
+				localStorage.setItem(storage_url+"_txt",data);
+				localStorage.setItem(storage_url+"_ver",$vm.version);
 				var current_all=data;
 				if(current_all.indexOf('VmInclude:')==-1){
 					$vm.create_module_and_run_code(current_all,pid,url,slot,m_name);
