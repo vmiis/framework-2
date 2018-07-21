@@ -176,18 +176,20 @@ $vm.load_module=function(options){
 	//------------------------------
 	if($('#D'+pid).length==0){
         //------------------------------
-        if(url.indexOf('http://')==-1 && url.indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
+        //if(url.indexOf('http://')==-1 && url.indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
 		//------------------------------
 		var ver=localStorage.getItem(url+"_ver");
 		var txt=localStorage.getItem(url+"_txt");
-        var http127_i=0;
+		var http127_i=0;
+		if($vm.hosting_path.indexOf('http://127.0.0.1')!=-1 || $vm.hosting_path.indexOf('http://localhost')!=-1) http127_i=1;
+		/*
 		if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127_i=1;
 		else if($vm.localhost==true && url.indexOf('http://')==-1 && url.indexOf('https://')==-1){ //like modules/home.html
             http127_i=1;
             if(url[0]=='/') url=$vm.hosting_path+url;
             else url=$vm.hosting_path+"/"+url;
         }
-
+		*/
 		var reload=0;
 		if(window.location.toString().indexOf('reload='+m_name)!=-1){
 			reload=1;
