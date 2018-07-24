@@ -118,11 +118,12 @@ $vm.nav_signout=function(){
 	}
 	$VmAPI.clear_token();
 	$VmAPI.request({data:{cmd:'signout'},callback:function(c){
+		sessionStorage["signinout"]=1;
 		location.reload(true);
 	}});
 }
 //---------------------------------------------
-$vm.nav_signout_and_reload=function(module){
+$vm.nav_signout_and_load=function(module){
 	if($vm.user_puid=="1"){
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
@@ -133,6 +134,10 @@ $vm.nav_signout_and_reload=function(module){
 	$VmAPI.clear_token();
 	$VmAPI.request({data:{cmd:'signout'},callback:function(c){
 		$vm.load_module_v2(module,'',{});
+		$vm.user='guest'
+		$vm.user_puid='guest';
+		$vm.user_puid='';
+		if($vm.show_user!=undefined) $vm.show_user();
 	}});
 }
 //---------------------------------------------
