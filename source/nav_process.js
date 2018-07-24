@@ -122,7 +122,7 @@ $vm.nav_signout=function(){
 	}});
 }
 //---------------------------------------------
-$vm.nav_signout_without_reload=function(){
+$vm.nav_signout_and_reload=function(module){
 	if($vm.user_puid=="1"){
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
@@ -132,6 +132,21 @@ $vm.nav_signout_without_reload=function(){
 	}
 	$VmAPI.clear_token();
 	$VmAPI.request({data:{cmd:'signout'},callback:function(c){
+		$vm.load_module_v2(module,'',{});
+	}});
+}
+//---------------------------------------------
+$vm.nav_signout_without_reload=function(callback){
+	if($vm.user_puid=="1"){
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut();
+	}
+	else if($vm.user_puid=="2"){
+		FB.logout(function(response){});
+	}
+	$VmAPI.clear_token();
+	$VmAPI.request({data:{cmd:'signout'},callback:function(c){
+		if(callback!=undefined) callback();
 	}});
 }
 //---------------------------------------------
