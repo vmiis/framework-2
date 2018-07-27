@@ -1,5 +1,5 @@
 //------------------------------------------------------------------
-if($vm.url!=undefined) $vm.url=function(text){return text;}
+if($vm.url==undefined) $vm.url=function(text){return text;}
 $vm.init_v3=function(options){
 	var callback=options.callback;
 	if($vm.vm==undefined) $vm.vm={};
