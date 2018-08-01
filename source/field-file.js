@@ -3,7 +3,7 @@ $vm.render_file_field=function(record,mID,$div,callback){
     var field=$div.attr('data-id');
     var filename=""; if(record!=undefined) filename=record[field]; if(filename==undefined) filename=""
     var html="<u style='cursor:pointer'>"+$vm.text(filename)+"</u>";
-    html+="<span class=file_button"+mID+"> <a class=choose_file"+mID+" title='Choose a file'><i class='fa fa-file'></i></a></span>";
+    html+="<span class=file_button"+mID+"> <a class=choose_file"+mID+" title='Choose a file'><i class='fa fa-paperclip'></i></a></span>";
     html+="<input type=file name="+field+" style='display:none'></input>";
     $div.html(html);
     $div.find('u').on('click',function(){
@@ -14,9 +14,9 @@ $vm.render_file_field=function(record,mID,$div,callback){
         }
         else alert("No file was found on server.")
     });
-    $div.find('a.choose_file'+mID).on('click',function(){
-        $div.find('input[type=file]').trigger('click');
-    })
+    //$div.find('a.choose_file'+mID).on('click',function(){
+        //$div.find('input[type=file]').trigger('click');
+    //})
     $div.find('input[type=file]').on('change',function(evt){
         var size='';
         var lastModified='';
