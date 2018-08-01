@@ -14,9 +14,9 @@ $vm.render_file_field=function(record,mID,$div,callback){
         }
         else alert("No file was found on server.")
     });
-    //$div.find('a.choose_file'+mID).on('click',function(){
-        //$div.find('input[type=file]').trigger('click');
-    //})
+    $div.find('a.choose_file'+mID).on('click',function(){
+        $div.find('input[type=file]').trigger('click');
+    })
     $div.find('input[type=file]').on('change',function(evt){
         var size='';
         var lastModified='';
@@ -57,6 +57,36 @@ $vm.upload_form_files=function(rid,$form,upload_files_callback){
         $form.find('input[type=file]').each(function(evt){
             if(this.files.length===1){
                 upload_a_file(rid,this.files[0],function(){
+                    total_num--;
+                    if(total_num==0){
+                        upload_files_callback();
+                    }
+                });
+            }
+        });
+    }
+    else upload_files_callback();
+    //--------------------------------------------------------
+}
+//--------------------------------------------------------
+$vm.upload_form_files_v2=function(res,$form,upload_files_callback){
+    //--------------------------------------------------------
+    var upload_a_file=function(res,file,upload_a_file_callback){
+        $vm.uploading_file_v3(res,file,function(){
+            upload_a_file_callback();
+        });
+    }
+    //--------------------------------------------------------
+    var total_num=0;
+    $form.find('input[type=file]').each(function(evt){
+        if(this.files.length===1){
+            total_num++;
+        }
+    });
+    if(total_num!=0){
+        $form.find('input[type=file]').each(function(evt){
+            if(this.files.length===1){
+                upload_a_file(res,this.files[0],function(){
                     total_num--;
                     if(total_num==0){
                         upload_files_callback();
