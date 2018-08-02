@@ -32,6 +32,40 @@ $vm.render_file_field=function(record,mID,$div,callback){
     })
 }
 //-------------------------------------
+$vm.render_file_field_v2=function(record,mID,$div,callback){ //new permission
+    if(record===undefined) record={};
+    var field=$div.attr('data-id');
+    var filename=""; if(record!=undefined) filename=record[field]; if(filename==undefined) filename=""
+    var html="<u style='cursor:pointer'>"+$vm.text(filename)+"</u>";
+    html+="<span class=file_button"+mID+"> <a class=choose_file"+mID+" title='Choose a file'><i class='fa fa-paperclip'></i></a></span>";
+    html+="<input type=file name="+field+" style='display:none'></input>";
+    $div.html(html);
+    $div.find('u').on('click',function(){
+        var rid=record.ID;
+        if(rid!==undefined){
+            filename=record[field]; if(filename==undefined) filename=""
+            if(filename!="") $vm.open_link_v2(rid,filename,5);
+        }
+        else alert("No file was found on server.")
+    });
+    $div.find('a.choose_file'+mID).on('click',function(){
+        $div.find('input[type=file]').trigger('click');
+    })
+    $div.find('input[type=file]').on('change',function(evt){
+        var size='';
+        var lastModified='';
+        if(this.files.length==1){
+            $div.find('u').html(this.files[0].name);
+            size=this.files[0].size;
+            lastModified=$vm.date_to_string_yyyymmdd(new Date(this.files[0].lastModified));
+        }
+        else{ $div.find('u').html("");}
+        if(record!=undefined) record.vm_dirty=1;
+        $('#save'+mID).css('background','#E00');
+        if(callback!=undefined) callback(size,lastModified);
+    })
+}
+//-------------------------------------
 $vm.upload_form_files=function(rid,$form,upload_files_callback){
     //--------------------------------------------------------
     var upload_a_file=function(rid,file,upload_a_file_callback){

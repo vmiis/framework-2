@@ -54,7 +54,7 @@ $vm.serialize_file=function(form_id){
     var data={};
     $(form_id+" input:file").each(function(){
         if(this.files.length==1){
-            data[this.name]=this.files[0].name;
+            data[this.name]=this.files[0].name+'|'+this.files[0].type;
         }
 	})
     return data;
