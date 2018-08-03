@@ -33,6 +33,8 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
 		if(url.indexOf('?')!==-1) new_url=url+'&_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
 		console.log('loading from url. '+new_url)
 		$.get(new_url, function(data){
+			var c_m=$("<p>"+data+"</p>").filter('#D__ID').html();
+			if(c_m!=undefined && c_m!='' && c_n!=null){ data=c_m;}
 			if(items.length>1){
 				for(var kk=0;kk<(items.length-1)/2;kk++){
 					var k1=2*kk+1;

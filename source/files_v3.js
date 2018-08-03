@@ -94,3 +94,17 @@ $vm.uploading_thumb_v3=function(res,file,callback){
     //--------------------
 }
 //---------------------------------------------
+$vm.open_link_v2=function(rid,filename,minutes){
+    var req={cmd:'get_s3_download_url',rid:rid,filename:filename,minutes:minutes};
+    $VmAPI.request({data:req,callback:function(res){
+        var link = document.createElement("a");
+        link.href = res.s3_download_url;
+        link.style = "visibility:hidden";
+        var fn=filename.split('-');
+        link.download = filename.replace(fn[0]+'-','').replace(/ /g,'_');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }});
+}
+//---------------------------------------------
