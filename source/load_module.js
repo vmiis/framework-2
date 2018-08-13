@@ -197,7 +197,9 @@ $vm.insert_module=function(options){
 				// .com/?
 			}
 		}
-		pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name.replace(/_/g,'\/')+dd;
+		var ext=q[0].split('.').pop();
+		if(ext=='html') pp=q[0]+"?/"+$vm.vm[pid].name.replace(/_/g,'\/')+dd;
+		else            pp=$vm.hosting_path+"/?/"+$vm.vm[pid].name.replace(/_/g,'\/')+dd;
 	}
     window.history.pushState({ID:pid,slot:slot,index:$vm.page_stack_index}, null, pp);
 	//if($vm.change_meta!=undefined){ $vm.change_meta(pid); }
