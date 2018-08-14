@@ -29,7 +29,8 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
         else url=$vm.hosting_path+"/"+url;
     }
 	if(ver!=$vm.version || http127_i==1 || txt==null || $vm.reload!=''){
-		var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
+		//var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
+		var new_url=url+'?_v='+new Date().getTime();
 		if(url.indexOf('?')!==-1) new_url=url+'&_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
 		console.log('loading from url. '+new_url)
 		$.get(new_url, function(data){
@@ -198,7 +199,8 @@ $vm.load_module=function(options){
 			reload=1;
 		}
 		if(ver!=$vm.version || http127_i==1 || txt==null || $vm.reload!='' || reload==1){
-			var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'');
+			//var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'');
+			var new_url=url+'?_v='+new Date().getTime();
 			if(url.indexOf('?')!==-1) new_url=url+'&_v='+($vm.version+$vm.reload).replace(/\./,'');
 			console.log('loading from url. '+new_url)
             if(window.location.hostname!='127.0.0.1' && window.location.hostname!='localhost')	$('#vm_loader').show();
