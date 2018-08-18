@@ -24,7 +24,7 @@ $vm.nav_click_process=function(name,slot){
 //-----------------------------------------
 $vm.nav_load_module=function(name,slot,config){
 	//var input=config;
-	if($vm.app_config.modules!=undefined && $vm.app_config.modules[name]!=undefined && $vm.app_config.modules[name].url!=undefined){
+	if($vm.app_config!=undefined && $vm.app_config.modules!=undefined && $vm.app_config.modules[name]!=undefined && $vm.app_config.modules[name].url!=undefined){
 		if($vm.module_list[name]==undefined){
 			$vm.module_list[name]=$vm.app_config.modules[name];
 		}
