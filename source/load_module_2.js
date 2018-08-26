@@ -181,7 +181,8 @@ $vm.load_module=function(options){
         //------------------------------
         //if(url.indexOf('http://')==-1 && url.indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
 		//------------------------------
-		var storage_url=$vm.hosting_path+"-"+url;
+		//var storage_url=$vm.hosting_path+"-"+url;
+        var storage_url=url;
 		var ver=localStorage.getItem(storage_url+"_ver");
 		var txt=localStorage.getItem(storage_url+"_txt");
 		var http127_i=0;
