@@ -186,7 +186,7 @@ $vm.load_module=function(options){
 		var ver=localStorage.getItem(storage_url+"_ver");
 		var txt=localStorage.getItem(storage_url+"_txt");
 		var http127_i=0;
-		if($vm.hosting_path.indexOf('http://127.0.0.1')!=-1 || $vm.hosting_path.indexOf('http://localhost')!=-1) http127_i=1;
+		if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127_i=1;
 		/*
 		if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127_i=1;
 		else if($vm.localhost==true && url.indexOf('http://')==-1 && url.indexOf('https://')==-1){ //like modules/home.html
@@ -203,7 +203,7 @@ $vm.load_module=function(options){
 			//var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'');
 			var new_url=url+'?_v='+new Date().getTime();
 			if(url.indexOf('?')!==-1) new_url=url+'&_v='+($vm.version+$vm.reload).replace(/\./,'');
-			console.log('loading from url. '+new_url)
+			console.log('loading from url. '+new_url+" "+ver+"/"+$vm.version+" 127:"+http127_i+" re:"+$vm.reload)
             if(window.location.hostname!='127.0.0.1' && window.location.hostname!='localhost')	$('#vm_loader').show();
 			$.get(new_url, function(data){
 				//-----------------------------------
