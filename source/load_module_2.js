@@ -18,8 +18,9 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
 	//url=url.replace('__CURRENT_PATH__',_g_current_path);
 	url=url.replace('__CURRENT_PATH__',$vm.vm[pid].current_path);
 	//------------------------------
-	var ver=localStorage.getItem(url+"_ver");
-	var txt=localStorage.getItem(url+"_txt");
+	var apppath=window.location.href.substring(0, window.location.href.lastIndexOf('/')).split('\/?')[0];
+	var ver=localStorage.getItem(apppath+url+"_ver");
+	var txt=localStorage.getItem(apppath+url+"_txt");
 
 	var http127_i=0;
 	if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127_i=1;
@@ -46,8 +47,8 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
 					}
 				}
 			}
-			localStorage.setItem(url+"_txt",data);
-			localStorage.setItem(url+"_ver",$vm.version);
+			localStorage.setItem(apppath+url+"_txt",data);
+			localStorage.setItem(apppath+url+"_ver",$vm.version);
 			var current_all=$vm.replace_and_recreate_content(lines,i,data)
 			if(current_all.indexOf('VmInclude:')==-1){
 				$vm.create_module_and_run_code(current_all,pid,url_0,slot,m_name);
@@ -182,9 +183,10 @@ $vm.load_module=function(options){
         //if(url.indexOf('http://')==-1 && url.indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
 		//------------------------------
 		//var storage_url=$vm.hosting_path+"-"+url;
+		var apppath=window.location.href.substring(0, window.location.href.lastIndexOf('/')).split('\/?')[0];
         var storage_url=url;
-		var ver=localStorage.getItem(storage_url+"_ver");
-		var txt=localStorage.getItem(storage_url+"_txt");
+		var ver=localStorage.getItem(apppath+storage_url+"_ver");
+		var txt=localStorage.getItem(apppath+storage_url+"_txt");
 		var http127_i=0;
 		if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127_i=1;
 		/*
@@ -213,8 +215,8 @@ $vm.load_module=function(options){
 					data=data.replace(/__CURRENT_NAME__/g,nm);
 				}
 				//-----------------------------------
-				localStorage.setItem(storage_url+"_txt",data);
-				localStorage.setItem(storage_url+"_ver",$vm.version);
+				localStorage.setItem(apppath+storage_url+"_txt",data);
+				localStorage.setItem(apppath+storage_url+"_ver",$vm.version);
 				var current_all=data;
 				if(current_all.indexOf('VmInclude:')==-1){
 					$vm.create_module_and_run_code(current_all,pid,url,slot,m_name);
