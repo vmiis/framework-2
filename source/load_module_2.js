@@ -33,7 +33,7 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
 		//var new_url=url+'?_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
 		var new_url=url+'?_v='+new Date().getTime();
 		if(url.indexOf('?')!==-1) new_url=url+'&_v='+($vm.version+$vm.reload).replace(/\./,'')+"&g="+_g_vm_chrom_loop++;
-		console.log('loading from url. '+new_url)
+		console.log('loading from url. '+new_url+" "+ver+"/"+$vm.version+" 127:"+http127_i+" re:"+$vm.reload)
 		$.get(new_url, function(data){
 			var c_m=$("<p>"+data+"</p>").filter('#D__ID').html();
 			if(c_m!=undefined && c_m!='' && c_n!=null){ data=c_m;}
@@ -61,7 +61,7 @@ $vm.load_include=function(lines,i,pid,slot,callback,url_0,m_name){
 
 	}
 	else{
-		console.log('loading from stotage. '+url)
+		console.log('loading from stotage. '+url+" "+ver+"/"+$vm.version+" 127:"+http127_i+" re:"+$vm.reload)
 		var current_all=$vm.replace_and_recreate_content(lines,i,txt)
 		if(current_all.indexOf('VmInclude:')==-1){
 			$vm.create_module_and_run_code(current_all,pid,url_0,slot,m_name);
@@ -230,7 +230,7 @@ $vm.load_module=function(options){
 			});
 		}
 		else{
-			console.log('loading from stotage. '+url)
+			console.log('loading from stotage. '+url+" "+ver+"/"+$vm.version+" 127:"+http127_i+" re:"+$vm.reload)
 			var current_all=txt;
 			if(current_all.indexOf('VmInclude:')==-1){
 				$vm.create_module_and_run_code(current_all,pid,url,slot,m_name);
