@@ -609,3 +609,27 @@ $vm.load_module_content=function(url,callback){ //used for iframe
 	else{ if(callback!=undefined) callback(txt); }
 	//------------------------------------------
 }
+
+
+$vm.load_component=function(url,div){
+	var apppath=window.location.href.substring(0, window.location.href.lastIndexOf('/')).split('\/?')[0];
+	var ver=localStorage.getItem(apppath+url+"ver");
+	var txt=localStorage.getItem(apppath+url+"txt");
+	var http127=0;
+	if(url.indexOf('http://127.0.0.1')!=-1 || url.indexOf('http://localhost')!=-1) http127=1;
+	if(ver!=$vm.ver[1] || http127==1 || txt==null){
+		$.get(url+'?_='+new Date().getTime(),function(new_txt){
+			localStorage.setItem(apppath+url+"txt",new_txt);
+			localStorage.setItem(apppath+url+"ver",$vm.ver[1]);
+			console.log('loading from url. '+url+' '+ver+'/'+$vm.ver[1]+" 127:"+http127);
+			new_txt=new_txt.replace(/__CURRENT_URL__/g,url);
+			$('#'+div).html(new_txt);
+		},'text');
+	}
+	else{
+		console.log('loading from storage. '+url+' '+ver+'/'+$vm.ver[1]+" 127:"+http127);
+		txt=txt.replace(/__CURRENT_URL__/g,url);
+		$('#'+div).html(txt);
+	}
+	//---------------------------------------------
+};
